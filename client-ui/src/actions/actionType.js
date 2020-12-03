@@ -1,0 +1,20 @@
+// **********  MENU & CUSTOMER ************
+export const REQUEST_SEND = 'REQUEST_SEND';
+export const REQUEST_ACCEPT = 'REQUEST_ACCEPT';
+export const REQUEST_REJECT = 'REQUEST_REJECT';
+
+
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const LOG_IN_LOADING = 'LOG_IN_WAITING';
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
+export const SET_ERRORS = 'SET_ERRORS';
+
+export const ENTITY_FAILURE = 'ENTITY_FAILURE';
+export const ENTITY_CREATE = 'ENTITY_CREATE';
+export const ENTITY_UPDATE = 'ENTITY_UPDATE';
+export const ENTITY_FETCH = 'ENTITY_FETCH';
+export const ENTITY_DELETE = 'ENTITY_DELETE';
+export const SELECT_ENTITY_ITEM = 'SELECT_ENTITY_ITEM';
+export const CLEAR_ENTITY_LIST = 'CLEAR_ENTITY_LIST';
