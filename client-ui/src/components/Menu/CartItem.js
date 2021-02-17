@@ -24,7 +24,7 @@ const CartItem = () => {
 					</div>
 				</div>
 				<div class="card-image">
-					<img src={require('../../assets/food png.png')} />
+					<img src="http://localhost:5000/server/uploads/system/food.png" />
 				</div>
 			</div>
 		</div>

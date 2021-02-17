@@ -1,4 +1,4 @@
-import { Sidenav } from 'materialize-css';
+import 'materialize-css';
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
@@ -16,7 +16,9 @@ const RequestsView = () => {
 
 	const onRequestAccept = (request) => {
 		//svae customer to db, emit new customer
-		socket.emit('request_result', request, () => {});
+		socket.emit('request_result', request, (r) => {
+			console.log('the request')
+		});
 	};
 
 	const handleNewItem = (request) => {
@@ -29,26 +31,12 @@ const RequestsView = () => {
 				time: parseInt((newTime - request.customerId) / 60000)
 			};
 			console.log('items', items);
-      setItems(items => [ ...items, newitem ]);
+			setItems((items) => [ ...items, newitem ]);
 		}
 	};
 
-	console.log('items', items)
+	console.log('items', items);
 	return (
-		<div className="sfaff-wrapper">
-			<aside>
-				<div className="aside-img">
-					<img src={require('../../assets/food png.png')} />
-				</div>
-				<ul>
-					<li>tables</li>
-					<li>tables</li>
-					<li>tables</li>
-					<li>tables</li>
-					<li>tables</li>
-					<li>tables</li>
-				</ul>
-			</aside>
 			<main>
 				<div className="breadcrumbs">
 					<h3>Page Name</h3>
@@ -97,7 +85,6 @@ const RequestsView = () => {
 					</div>
 				</div>
 			</main>
-		</div>
 	);
 };
 

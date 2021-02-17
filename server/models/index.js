@@ -26,8 +26,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// db.client = require("./client.model")(sequelize);
+//staff
 db.user = require('./manage/UserModel')(sequelize);
+db.privilege = require('./manage/PrivilegeModel')(sequelize);
+db.permission = require('./manage/PermissionModel')(sequelize);
 //menu
 db.menu_item = require('./menu/MenuItem')(sequelize);
 db.item_size = require('./menu/ItemSizes')(sequelize);

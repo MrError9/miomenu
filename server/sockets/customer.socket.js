@@ -1,5 +1,10 @@
 module.exports = function(io) {
 	io.on('connection', (socket) => {
+
+		socket.on('waitingRequestResponse', (request, callback) =>{
+			socket.join(request.request_id)
+			callback()
+		}) 
 		socket.on('customerRequest', (request, callback) => {
 			socket.join(request.customerId);
 			io.emit('new_request', request);
@@ -8,6 +13,7 @@ module.exports = function(io) {
 		});
 
 		socket.on('request_result', (request, callback) => {
+			console.log('server socket request', request)
 			io.to(request.customerId).emit('request_response', {
         customer:request,
         result:'accepted'

@@ -4,7 +4,7 @@ const ItemCard = () => {
 	return (
 		<div>
 			<div className="card">
-				<img className="circle" src={require('../../assets/food png.png')} alt="" />
+				<img className="circle" src="http://192.168.1.9:5000/server/uploads/system/food.png" alt="" />
 				<h4>greek salad</h4>
 				<div className="food-details">
 					<p>

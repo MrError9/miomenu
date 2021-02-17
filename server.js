@@ -28,6 +28,24 @@ require('./server/routes/menu.routes')(app);
 require('./server/routes/user.routes')(app);
 require('./server/routes/table.routes')(app);
 require('./server/routes/manage/customer.routes')(app);
+// uploads/products
+// getting the product image
+// public
+app.get('/server/uploads/:dest/:file',(req,res) =>{
+    const {file, dest} =req.params;
+    const targetFile = (`./uploads/${dest}/${file}`);
+
+    if((targetFile).length>0){
+        res.sendFile(`./uploads/${dest}/${file}`, {
+            "root": __dirname
+        })
+    }else {
+      res.status(404).send({
+        message : "file not found"
+      })
+    }
+   
+})
 
 
 server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));

@@ -1,5 +1,5 @@
 // Import custom components
-import { LOG_IN_SUCCESS, LOG_IN_FAILURE, LOG_OUT_SUCCESS, LOG_IN_LOADING } from '../actions/actionType';
+import { LOG_IN_LOADING, SET_CURRENT_USER } from '../actions/actionType';
 
 var initialState = {
 	user: {},
@@ -14,24 +14,11 @@ const authReducer = (state, action) => {
 	state = state || initialState;
 
 	switch (action.type) {
-		case LOG_IN_SUCCESS:
+		case SET_CURRENT_USER:
 			return Object.assign({}, state, {
-				isAuthenticated: true,
+				isAuthenticated: action.data === {} ? false : true,
 				isLoading: false,
 				user: action.data
-			});
-		case LOG_IN_FAILURE:
-			return Object.assign({}, state, {
-				isAuthenticated: false,
-				isLoading: false,
-				user: {},
-				errorMessage: action.error.message || 'Something went wrong.'
-			});
-		case LOG_OUT_SUCCESS:
-			return Object.assign({}, state, {
-				isAuthenticated: false,
-				isLoading: false,
-				user: {}
 			});
 		case LOG_IN_LOADING:
 			return Object.assign({}, state, {

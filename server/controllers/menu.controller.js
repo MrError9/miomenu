@@ -64,6 +64,16 @@ exports.findAll = async (req, res) => {
 	}
 };
 
+// @route   POST api/store/products/product-image
+// @desc    upload product image
+// @access  Private
+exports.upload = async (req, res) => {
+	console.log('req.file', req.file)
+	res.send({
+		file:req.file
+	})
+};
+
 // Find a single Client with an id
 // Path GET /api/clients/:id
 // exports.findOne = (req, res) => {

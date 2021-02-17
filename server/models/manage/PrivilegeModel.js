@@ -1,26 +1,22 @@
 const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
-	const UserModel = sequelize.define(
-		'users',
+	const PrivilegeModel = sequelize.define(
+		'privileges',
 		{
-			user_id: {
+			privilege_id: {
 				type: Sequelize.INTEGER,
 				primaryKey: true
 			},
-			password: {
-				type: Sequelize.STRING
-			},
-			name: {
-				type: Sequelize.STRING
-			},
-			role_name: {
+			title: {
 				type: Sequelize.STRING
 			}
 		},
 		{
+			createdAt: false,
+			updatedAt: false,
 			id: false
 		}
 	);
 
-	return UserModel;
+	return PrivilegeModel;
 };

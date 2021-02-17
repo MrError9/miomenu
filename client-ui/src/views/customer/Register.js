@@ -9,7 +9,7 @@ import {
 	checkCustomer,
 	checkRequest,
 	setUser
-} from '../../actions/customer-db/registrationAction';
+} from '../../actions/customer-db/registrationActions';
 
 const ENDPOINT = '192.168.1.9:5000';
 let socket;
@@ -29,7 +29,7 @@ function testStorage(history) {
 	}
 }
 
-const Registration = ({location}) => {
+const Registration = ({ location }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -45,7 +45,12 @@ const Registration = ({location}) => {
 				history.push('/menu');
 			} else {
 				const request = await checkRequest(id);
-				if (request) dispatch(requestSent());
+				if (request) {
+					dispatch(requestSent());
+					socket.emit('waitingRequestResponse',request, () =>{
+						console.log('waiting for request response')
+					})
+				}
 			}
 			if (name) setName(name);
 		} catch (error) {
@@ -58,9 +63,10 @@ const Registration = ({location}) => {
 		socket = io(ENDPOINT);
 
 		socket.on('request_response', (res) => {
-			const {customer, result} = res
-			console.log('customer', customer)
-			console.log('result', result)
+			const { customer, result } = res;
+			console.log('customer', customer);
+			console.log('result', result);
+			if (result === 'accepted' && customer) dispatch(setUser(customer));
 		});
 		try {
 			const mioCustomer = JSON.parse(localStorage.getItem('MioCustomer'));
@@ -92,7 +98,7 @@ const Registration = ({location}) => {
 			localStorage.setItem('MioCustomer', JSON.stringify(newCustomer));
 			await sendRequest(newCustomer);
 			socket.emit('customerRequest', newCustomer, () => {
-				console.log('REQUEST SENT TO THE SERVER')
+				console.log('REQUEST SENT TO THE SERVER');
 			});
 			dispatch(requestSent());
 			alert('request send');
@@ -108,7 +114,7 @@ const Registration = ({location}) => {
 		<div className="request-wrapper">
 			<br />
 			<div className="request-logo">
-				<img src="https://logos-world.net/wp-content/uploads/2020/04/McDonalds-Logo-2018%E2%80%93present.png" />
+				<img src="http://192.168.1.9:5000/server/uploads/system/logoo.png" />
 			</div>
 			<br />
 			<br />
@@ -123,7 +129,7 @@ const Registration = ({location}) => {
 						className="validate"
 						placeholder="name"
 					/>
-					<span className="helper-text"  data-error="wrong" data-success="right">
+					<span className="helper-text" data-error="wrong" data-success="right">
 						Name must be between 2 & 10 letters{' '}
 					</span>
 				</div>
@@ -157,6 +163,6 @@ const Registration = ({location}) => {
 			)}
 		</div>
 	);
-}
+};
 
 export default Registration;

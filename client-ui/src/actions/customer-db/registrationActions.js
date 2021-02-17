@@ -1,6 +1,6 @@
 // Import actionType constants
 import axios from 'axios';
-import { LOG_IN_SUCCESS, SET_ERRORS, REQUEST_SEND, REQUEST_ACCEPT } from '../actionType';
+import { SET_ERRORS, REQUEST_SEND, REQUEST_ACCEPT } from '../actionType';
 
 export const registerCustomer = (table) => (dispatch) => {
 	//dispatch(setLoading());
@@ -47,14 +47,6 @@ export const checkRequest = async(id) =>{
 		console.log('THIS IS THE AUTH ERROR', error);
 		throw new Error('Could not check customer');
 	}
-};
-
-// Set current user
-export const loginSuccess = (data) => {
-	return {
-		type: LOG_IN_SUCCESS,
-		data
-	};
 };
 
 export const setUser = (data) =>{
