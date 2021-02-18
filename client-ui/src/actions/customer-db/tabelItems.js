@@ -1,6 +1,6 @@
 // Import actionType constants
 import axios from 'axios';
-import { LOG_IN_SUCCESS, SET_ERRORS } from '../actionType';
+import { SET_CURRENT_USER, SET_ERRORS, LOG_IN_LOADING } from '../actionType';
 
 export const registerCustomer = (table) => dispatch => {
 	dispatch(setLoading());
@@ -22,7 +22,7 @@ export const registerCustomer = (table) => dispatch => {
 // Set current user
 export const loginSuccess = (data) => {
 	return {
-		type: LOG_IN_SUCCESS,
+		type: SET_CURRENT_USER,
 		data
 	};
 };

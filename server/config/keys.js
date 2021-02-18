@@ -1,7 +1,4 @@
-// if (process.env.NODE_ENV === 'production') {
-// 	module.exports = require('./keys_prod');
-// } else {
-	module.exports = {
-		secretOrKey: 'secret'
-	};
-//}
+module.exports = {
+    secretOrKey: process.env.SECRET_OR_KEY,
+    saltOrRounds:process.env.SALT_OR_ROUNDS
+}

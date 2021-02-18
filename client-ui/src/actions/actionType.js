@@ -5,7 +5,7 @@ export const REQUEST_REJECT = 'REQUEST_REJECT';
 
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
-export const LOG_IN_LOADING = 'LOG_IN_WAITING';
+export const LOG_IN_LOADING = 'LOG_IN_LOADING';
 export const SET_ERRORS = 'SET_ERRORS';
 
 export const ENTITY_FAILURE = 'ENTITY_FAILURE';

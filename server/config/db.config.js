@@ -1,9 +1,9 @@
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "12345678",
-  DB: "mio_resturant",
-  dialect: "mysql",
+  HOST: process.env.DB_HOST,
+  USER: process.env.DB_USERNAME,
+  PASSWORD: process.env.DB_PASSWORD,
+  DB: process.env.DB_DATABASE,
+  dialect: process.env.DB_CONNECTION,
   pool: {
     max: 5,
     min: 0,

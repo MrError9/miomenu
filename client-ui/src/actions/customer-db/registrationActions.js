@@ -1,6 +1,8 @@
 // Import actionType constants
 import axios from 'axios';
+import { loginSuccess } from './tabelItems'
 import { SET_ERRORS, REQUEST_SEND, REQUEST_ACCEPT } from '../actionType';
+
 
 export const registerCustomer = (table) => (dispatch) => {
 	//dispatch(setLoading());
@@ -19,7 +21,7 @@ export const registerCustomer = (table) => (dispatch) => {
 		});
 };
 
-export const checkCustomer = async(id) =>{
+export const checkCustomer = async (id) => {
 	try {
 		const res = await axios.get(`/api/table/customers/${id}`);
 		return res.data;
@@ -29,7 +31,7 @@ export const checkCustomer = async(id) =>{
 	}
 };
 
-export const sendRequest = async(customer) =>{
+export const sendRequest = async (customer) => {
 	try {
 		const res = await axios.post('/api/table/requests', customer);
 		return res.data;
@@ -39,7 +41,7 @@ export const sendRequest = async(customer) =>{
 	}
 };
 
-export const checkRequest = async(id) =>{
+export const checkRequest = async (id) => {
 	try {
 		const res = await axios.get(`/api/table/requests/${id}`);
 		return res.data;
@@ -49,11 +51,11 @@ export const checkRequest = async(id) =>{
 	}
 };
 
-export const setUser = (data) =>{
+export const setUser = (data) => {
 	return {
-		type:REQUEST_ACCEPT,
+		type: REQUEST_ACCEPT,
 		data
-	}	
+	}
 }
 
 // Set current user
