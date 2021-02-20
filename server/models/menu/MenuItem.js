@@ -17,6 +17,10 @@ module.exports = (sequelize) => {
 				type: Sequelize.BOOLEAN,
 				defaultValue: true
 			},
+			tags: {
+				type: Sequelize.STRING,
+				allowNull: true
+			},
 			time: {
 				type: Sequelize.INTEGER,
 				allowNull: true
@@ -46,7 +50,6 @@ module.exports = (sequelize) => {
 			}
 		},
 		{
-			updatedAt: false,
 			id: false
 		}
 	);

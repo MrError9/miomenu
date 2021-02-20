@@ -18,6 +18,11 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//enable dotnev in order to use the env variables
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 //sockets 
 require('./server/sockets/customer.socket')(io)
 require('./server/sockets/menu.socket')(io)

@@ -51,8 +51,8 @@ exports.login = async (req, res) => {
 };
 
 // PRIVATE CRUD-users (12)
-// api/users/register
-exports.register = async (req, res) => {
+// api/users/create
+exports.createAdmin = async (req, res) => {
 	const { password, name, privileges } = req.body;
 	//check if the user has permission to proceed
 	if (!req.user.privileges.includes('ADMIN') || privileges.includes('SUPER'))
@@ -97,6 +97,39 @@ exports.register = async (req, res) => {
 		console.log('This is error', error);
 		res.status(500).send({
 			message: error.message || 'Some error occurred while creating user.'
+		});
+	}
+};
+
+// get all system users
+// api/users/all [private]
+exports.getAllAdmins = async (req, res) => {
+	if (!req.user.privileges.includes('ADMIN') && !req.user.privileges.includes('SUPER'))
+		return res.status(403).json('Unauthorized');
+	try {
+		let data = await User.findAll({
+			attributes: ['name', 'email', 'createdAt', 'updatedAt', 'privileges', 'user_id', 'suspended']
+		});
+		if (!data) {
+			res.status(404).json({
+				result: 'Fail',
+				message: {
+					en: 'there is no data'
+				}
+			});
+		}
+		data = data.filter(data => !data.privileges.includes('SUPER'))
+		return res.json({
+			result: 'Success',
+			message: data
+		});
+	} catch (error) {
+		console.log('error :>> ', error);
+		res.status(500).json({
+			result: 'Fail',
+			message: {
+				en: 'Some error occurred while getting blogs'
+			}
 		});
 	}
 };

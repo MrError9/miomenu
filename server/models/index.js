@@ -26,14 +26,11 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-//staff
-db.user = require('./manage/UserModel')(sequelize);
-db.privilege = require('./manage/PrivilegeModel')(sequelize);
-db.permission = require('./manage/PermissionModel')(sequelize);
+//users
+db.user = require('./UserModel')(sequelize);
 //menu
 db.menu_item = require('./menu/MenuItem')(sequelize);
-db.item_size = require('./menu/ItemSizes')(sequelize);
-db.item_category = require('./menu/ItemCategories')(sequelize);
+db.category = require('./menu/Categories')(sequelize);
 //general
 db.table = require('./general/TableModel')(sequelize);
 db.customer = require('./general/CustomerModel')(sequelize);
@@ -43,9 +40,7 @@ db.tabel_item = require('./general/TableItem')(sequelize);
 
 //Asosiactions
 db.menu_item.belongsTo(db.user, { as: 'chef', foreignKey: 'user_id' });
-db.menu_item.belongsTo(db.item_category, { as: 'category', foreignKey: 'category_id' });
-db.menu_item.hasMany(db.item_size, {foreignKey: 'item_id'});
-db.item_size.belongsTo(db.menu_item, {foreignKey: 'item_id'});
+db.menu_item.belongsTo(db.category, { as: 'category', foreignKey: 'category_id' });
 db.customer.belongsTo(db.table, { as: 'table', foreignKey: 'table_id' });
 db.tabel_item.belongsTo(db.table, { as: 'table', foreignKey: 'table_id' });
 db.tabel_item.belongsTo(db.customer, { as: 'customer', foreignKey: 'customer_id' });

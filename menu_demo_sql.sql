@@ -49,6 +49,8 @@ CREATE TABLE `items` (
     `desc_en` TEXT,
     `desc_ar` TEXT,
     `desc_ku` TEXT,
+    `createdAt` DATETIME,
+	`updatedAt` DATETIME,
     PRIMARY KEY (`item_id`),
 	KEY `fk_items_categories_idx` (`category_id`),
     KEY `fk_items_users_idx` (`user_id`),

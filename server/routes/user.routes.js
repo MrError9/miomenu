@@ -5,10 +5,12 @@ module.exports = (app) => {
 
 	// User Auth
 	router.post('/login', user.login);
-	router.post('/register', passport.authenticate('jwt', { session: false }), user.register);
-	//permissions
-	router.post('/grant-permission', passport.authenticate('jwt', { session: false }), user.grantPermission);
-	router.post('/revoke-permission', passport.authenticate('jwt', { session: false }), user.revokePermission);
+	router.get('/all', passport.authenticate('jwt', { session: false }), user.getAllAdmins);
+	router.post('/create', passport.authenticate('jwt', { session: false }), user.createAdmin);
+	router.post('/update', passport.authenticate('jwt', { session: false }), user.updateUser);
+	router.post('/change-password',passport.authenticate('jwt', { session: false }),user.changePassword);
+	// router.post('/grant-permission', passport.authenticate('jwt', { session: false }), user.grantPermission);
+	// router.post('/revoke-permission', passport.authenticate('jwt', { session: false }), user.revokePermission);
 	
 
 	app.use('/api/users', router);
