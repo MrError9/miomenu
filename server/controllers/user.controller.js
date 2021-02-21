@@ -55,30 +55,30 @@ exports.login = async (req, res) => {
 exports.createAdmin = async (req, res) => {
 	const { password, name, privileges } = req.body;
 	//check if the user has permission to proceed
-	if (!req.user.privileges.includes('ADMIN') || privileges.includes('SUPER'))
-		return res.status(403).json({
-			result: 'Fail',
-			message: {
-				en: 'Unauthorized'
-			}
-		});
+	// if (!req.user.privileges.includes('ADMIN') || privileges.includes('SUPER'))
+	// 	return res.status(403).json({
+	// 		result: 'Fail',
+	// 		message: {
+	// 			en: 'Unauthorized'
+	// 		}
+	// 	});
 	// proceed action
 	//hash the password
 	try {
 		//check if email already exist
 		const userExist = await User.findOne({
 			where: {
-				email
+				name
 			}
 		});
-		if (userExist) {
+		if (userExist) 
 			return res.status(400).json({
 				result: 'Fail',
 				message: {
 					en: 'User already exist'
 				}
 			});
-		}
+		
 		const hash = await bcrypt.hash(password, parseInt(saltOrRounds));
 		// Create a user
 		const newUser = {
@@ -96,7 +96,7 @@ exports.createAdmin = async (req, res) => {
 	} catch (error) {
 		console.log('This is error', error);
 		res.status(500).send({
-			message: error.message || 'Some error occurred while creating user.'
+			message: 'Some error occurred while creating user.'
 		});
 	}
 };

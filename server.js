@@ -52,5 +52,8 @@ app.get('/server/uploads/:dest/:file',(req,res) =>{
    
 })
 
+app.get('/server',(req, res) =>{
+  res.send("hahhshshhshshshshshshhshs")
+})
 
 server.listen(process.env.PORT || 5005, () => console.log(`Server has started.`));
